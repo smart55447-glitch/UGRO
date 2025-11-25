@@ -1,0 +1,418 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+    background: #f5f5f5;
+    color: #111;
+}
+
+/* 전체 앱 래퍼 */
+.app {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+/* 화면 흔들림 */
+.app.shake {
+    animation: screenShake 0.12s;
+}
+
+@keyframes screenShake {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(-2px, 1px);
+    }
+
+    50% {
+        transform: translate(2px, -1px);
+    }
+
+    75% {
+        transform: translate(-1px, -2px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* 상단 영역 */
+.header h1 {
+    font-size: 1.6rem;
+    letter-spacing: 0.2em;
+}
+
+.subtitle {
+    font-size: 0.85rem;
+    color: #999;
+    margin-top: 4px;
+}
+
+.hint {
+    font-size: 0.8rem;
+    color: #c33;
+    margin-top: 4px;
+}
+
+.status {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 8px;
+    display: flex;
+    gap: 12px;
+}
+
+/* 메인 영역 */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+button {
+    font-family: inherit;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* 시작 버튼 */
+#startButton {
+    border: 1px solid #111;
+    background: #fff;
+    color: #111;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#startButton:active {
+    transform: translateY(2px);
+}
+
+#warningText {
+    font-size: 0.85rem;
+    color: #888;
+    text-align: center;
+}
+
+/* 가짜 시스템 바 */
+.fake-system-bar {
+    width: 100%;
+    padding: 8px 12px;
+    border-top: 1px solid #ddd;
+}
+
+.fake-system-bar button {
+    border: 1px solid #111;
+    background: #fff;
+    color: #111;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.fake-system-bar button:active {
+    transform: translateY(1px);
+}
+
+/* 팝업 컨테이너 */
+#popupContainer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 900;
+}
+
+/* 팝업 */
+.popup {
+    position: absolute;
+    width: min(260px, 80vw);
+    max-height: 60vh;
+    /* 화면 기준 최대 높이 */
+    background: #fff;
+    border: 1px solid #111;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    pointer-events: auto;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-header {
+    background: #111;
+    color: #fff;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.popup-body {
+    padding: 12px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    overflow-y: auto;
+    /* 내용 많으면 팝업 안에서만 스크롤 */
+    flex: 1;
+}
+
+.popup-footer {
+    padding: 8px 10px;
+    display: flex;
+    justify-content: flex-end;
+    flex-shrink: 0;
+}
+
+.popup-footer button {
+    border: 1px solid #111;
+    background: #fff;
+    color: #111;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.popup-footer button:active {
+    transform: translateY(1px);
+}
+
+/* 위험한 팝업 */
+.popup.alert {
+    border: 1px solid #ff2222;
+}
+
+.popup.alert .popup-header {
+    background: #ff2222;
+}
+
+/* 탈출 레이어 (가짜) */
+#escapeLayer {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 900;
+}
+
+#escapeLayer.hidden {
+    display: none;
+}
+
+.escape-box {
+    border: 1px solid #111;
+    background: #fff;
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* 글리치 느낌 (클릭 많이 했을 때) */
+body.glitch {
+    animation: flicker 0.15s infinite alternate;
+}
+
+@keyframes flicker {
+    from {
+        background: #f5f5f5;
+    }
+
+    to {
+        background: #eee;
+    }
+}
+
+/* EXIT 눌렀을 때 뜨는 메시지 */
+.exit-message {
+    position: fixed;
+    left: 50%;
+    bottom: 70px;
+    transform: translateX(-50%);
+    background: #111;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    animation: exitToast 1.2s forwards;
+    z-index: 950;
+}
+
+@keyframes exitToast {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 10px);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translate(-50%, -2px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -6px);
+    }
+}
+
+/* 진짜 나가기 버튼 (100클릭 이후 언락) */
+.real-exit-btn {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 9999;
+    border: 1px solid #111;
+    background: #fff;
+    color: #111;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.real-exit-btn:active {
+    transform: translateY(1px);
+}
+
+/* 뒤로가기 경고 레이어 */
+.back-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9998;
+}
+
+.back-box {
+    max-width: 280px;
+    padding: 20px 18px;
+    border-radius: 16px;
+    border: 1px solid #fff;
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.back-box button {
+    margin-top: 14px;
+    border-radius: 999px;
+    border: 1px solid #fff;
+    background: transparent;
+    color: #fff;
+    padding: 6px 18px;
+    cursor: pointer;
+}
+
+/* 화면이 점점 검게 변하는 레이어 */
+#darkLayer {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    pointer-events: none;
+    /* 클릭 막지 않게 */
+    z-index: 850;
+    /* 팝업보다 아래, 가짜 탈출 레이어보단 아래 */
+    transition: background 0.2s linear;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 600px) {
+    .app {
+        padding: 12px;
+    }
+
+    .header h1 {
+        font-size: 1.3rem;
+        letter-spacing: 0.14em;
+    }
+
+    .subtitle,
+    .hint {
+        font-size: 0.75rem;
+    }
+
+    .status {
+        font-size: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    #startButton {
+        padding: 9px 18px;
+        font-size: 0.95rem;
+    }
+
+    #warningText {
+        font-size: 0.8rem;
+        padding: 0 12px;
+    }
+
+    .fake-system-bar {
+        padding: 6px 8px;
+    }
+
+    .fake-system-bar button {
+        font-size: 0.75rem;
+        padding: 5px 12px;
+    }
+
+    .popup {
+        width: 85vw;
+        max-height: 65vh;
+    }
+
+    .popup-body {
+        font-size: 0.8rem;
+    }
+
+    .escape-box {
+        width: 80vw;
+        padding: 20px 16px;
+    }
+
+    .exit-message {
+        bottom: 60px;
+        font-size: 0.75rem;
+    }
+
+    .real-exit-btn {
+        top: 12px;
+        right: 12px;
+        font-size: 0.75rem;
+    }
+}

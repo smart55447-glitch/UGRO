@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./src/style.css">
+    <title>EXIT ERROR LAB</title>
+</head>
+
+<body>
+    <div class="app">
+        <header class="header">
+            <h1>EXIT ERROR LAB</h1>
+            <p class="subtitle">닫으면 닫을수록, 깊어집니다.</p>
+            <p class="hint">100클릭 이상 달성시 보상이 주어 집니다.</p>
+            <div class="status">
+                <span id="clickCountDisplay">클릭 0회</span>
+                <span id="phaseLabel">상태: 안정</span>
+            </div>
+        </header>
+
+        <main class="main">
+            <button id="startButton">시스템 실행</button>
+            <p id="warningText">나가고 싶다면 눌러 보세요.</p>
+        </main>
+
+        <!-- 가짜 시스템 바 (EXIT) -->
+        <div class="fake-system-bar">
+            <button id="fakeExitBtn">EXIT</button>
+        </div>
+
+        <!-- 팝업 영역 -->
+        <div id="popupContainer"></div>
+    </div>
+
+    <!-- 화면 전체 어두워지는 레이어 (클릭 수에 따라 점점 검게) -->
+    <div id="darkLayer"></div>
+
+    <!-- 가짜 탈출 레이어 -->
+    <div id="escapeLayer" class="hidden">
+        <div class="escape-box">
+            <h2>탈출 성공</h2>
+            <p>이제 나갈 수 있습니다.</p>
+            <button id="escapeExitButton">나가기</button>
+        </div>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+</body>
+
+</html>
