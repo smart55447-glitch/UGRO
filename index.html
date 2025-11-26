@@ -4,7 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
     <link rel="stylesheet" href="./src/style.css">
+
+    <script src="https://clickbattle2025.web.app/click-battle.js"></script>
+    <script>ClickBattle.init("nonew");</script>
     <title>EXIT ERROR LAB</title>
 </head>
 
@@ -13,7 +17,7 @@
         <header class="header">
             <h1>EXIT ERROR LAB</h1>
             <p class="subtitle">닫으면 닫을수록, 깊어집니다.</p>
-            <p class="hint">100클릭 이상 달성시 보상이 주어 집니다.</p>
+            <p class="hint">100클릭 이상이면 토스 보상(추첨) 화면이 열립니다.</p>
             <div class="status">
                 <span id="clickCountDisplay">클릭 0회</span>
                 <span id="phaseLabel">상태: 안정</span>
@@ -22,7 +26,7 @@
 
         <main class="main">
             <button id="startButton">시스템 실행</button>
-            <p id="warningText">나가고 싶다면 눌러 보세요.</p>
+            <p id="warningText">나가고 싶다면… 눌러 보세요.</p>
         </main>
 
         <!-- 가짜 시스템 바 (EXIT) -->
@@ -34,7 +38,7 @@
         <div id="popupContainer"></div>
     </div>
 
-    <!-- 화면 전체 어두워지는 레이어 (클릭 수에 따라 점점 검게) -->
+    <!-- 화면 전체 어두워지는 레이어 (배경만 어두워짐) -->
     <div id="darkLayer"></div>
 
     <!-- 가짜 탈출 레이어 -->

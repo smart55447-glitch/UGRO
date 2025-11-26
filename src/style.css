@@ -53,29 +53,35 @@ body {
 }
 
 /* 상단 영역 */
+.header {
+    position: relative;
+    z-index: 950;
+    /* darkLayer 위 */
+}
+
 .header h1 {
-    font-size: 1.6rem;
-    letter-spacing: 0.2em;
+    font-size: 1.8rem;
+    letter-spacing: 0.22em;
 }
 
 .subtitle {
-    font-size: 0.85rem;
-    color: #999;
+    font-size: 0.95rem;
+    color: #777;
     margin-top: 4px;
 }
 
 .hint {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: #c33;
-    margin-top: 4px;
+    margin-top: 6px;
 }
 
 .status {
-    font-size: 0.8rem;
-    color: #666;
-    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #444;
+    margin-top: 10px;
     display: flex;
-    gap: 12px;
+    gap: 16px;
 }
 
 /* 메인 영역 */
@@ -99,9 +105,9 @@ button {
     border: 1px solid #111;
     background: #fff;
     color: #111;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border-radius: 999px;
-    font-size: 1rem;
+    font-size: 1.05rem;
     cursor: pointer;
 }
 
@@ -110,8 +116,8 @@ button {
 }
 
 #warningText {
-    font-size: 0.85rem;
-    color: #888;
+    font-size: 0.95rem;
+    color: #666;
     text-align: center;
 }
 
@@ -120,15 +126,18 @@ button {
     width: 100%;
     padding: 8px 12px;
     border-top: 1px solid #ddd;
+    position: relative;
+    z-index: 950;
+    /* darkLayer 위 */
 }
 
 .fake-system-bar button {
     border: 1px solid #111;
     background: #fff;
     color: #111;
-    padding: 6px 14px;
+    padding: 7px 16px;
     border-radius: 999px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     cursor: pointer;
 }
 
@@ -142,18 +151,18 @@ button {
     inset: 0;
     pointer-events: none;
     z-index: 900;
+    /* darkLayer 위 */
 }
 
 /* 팝업 */
 .popup {
     position: absolute;
-    width: min(260px, 80vw);
+    width: min(280px, 80vw);
     max-height: 60vh;
-    /* 화면 기준 최대 높이 */
     background: #fff;
     border: 1px solid #111;
-    border-radius: 10px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    border-radius: 12px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
     pointer-events: auto;
 
     display: flex;
@@ -163,8 +172,8 @@ button {
 .popup-header {
     background: #111;
     color: #fff;
-    padding: 6px 10px;
-    font-size: 0.8rem;
+    padding: 8px 12px;
+    font-size: 0.9rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -172,16 +181,16 @@ button {
 }
 
 .popup-body {
-    padding: 12px;
-    font-size: 0.85rem;
-    line-height: 1.4;
+    padding: 14px;
+    font-size: 0.95rem;
+    line-height: 1.5;
     overflow-y: auto;
-    /* 내용 많으면 팝업 안에서만 스크롤 */
+    white-space: pre-line;
     flex: 1;
 }
 
 .popup-footer {
-    padding: 8px 10px;
+    padding: 9px 12px;
     display: flex;
     justify-content: flex-end;
     flex-shrink: 0;
@@ -191,8 +200,8 @@ button {
     border: 1px solid #111;
     background: #fff;
     color: #111;
-    font-size: 0.8rem;
-    padding: 4px 12px;
+    font-size: 0.9rem;
+    padding: 6px 18px;
     border-radius: 999px;
     cursor: pointer;
 }
@@ -218,7 +227,7 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 900;
+    z-index: 920;
 }
 
 #escapeLayer.hidden {
@@ -257,9 +266,9 @@ body.glitch {
     transform: translateX(-50%);
     background: #111;
     color: #fff;
-    padding: 6px 12px;
+    padding: 7px 14px;
     border-radius: 999px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
     opacity: 0;
     animation: exitToast 1.2s forwards;
@@ -293,13 +302,13 @@ body.glitch {
     position: fixed;
     top: 16px;
     right: 16px;
-    z-index: 9999;
+    z-index: 960;
     border: 1px solid #111;
     background: #fff;
     color: #111;
-    padding: 6px 14px;
+    padding: 7px 16px;
     border-radius: 999px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     cursor: pointer;
 }
 
@@ -315,7 +324,7 @@ body.glitch {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9998;
+    z-index: 955;
 }
 
 .back-box {
@@ -339,15 +348,14 @@ body.glitch {
     cursor: pointer;
 }
 
-/* 화면이 점점 검게 변하는 레이어 */
+/* 화면이 점점 검게 변하는 레이어 (배경만 어두워지게) */
 #darkLayer {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0);
     pointer-events: none;
-    /* 클릭 막지 않게 */
-    z-index: 850;
-    /* 팝업보다 아래, 가짜 탈출 레이어보단 아래 */
+    z-index: 800;
+    /* 배경 위, 팝업/버튼 아래 */
     transition: background 0.2s linear;
 }
 
@@ -358,27 +366,27 @@ body.glitch {
     }
 
     .header h1 {
-        font-size: 1.3rem;
-        letter-spacing: 0.14em;
+        font-size: 1.5rem;
+        letter-spacing: 0.18em;
     }
 
     .subtitle,
     .hint {
-        font-size: 0.75rem;
+        font-size: 0.8rem;
     }
 
     .status {
-        font-size: 0.75rem;
+        font-size: 0.8rem;
         flex-wrap: wrap;
     }
 
     #startButton {
-        padding: 9px 18px;
-        font-size: 0.95rem;
+        padding: 10px 20px;
+        font-size: 1rem;
     }
 
     #warningText {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         padding: 0 12px;
     }
 
@@ -387,8 +395,8 @@ body.glitch {
     }
 
     .fake-system-bar button {
-        font-size: 0.75rem;
-        padding: 5px 12px;
+        font-size: 0.8rem;
+        padding: 6px 14px;
     }
 
     .popup {
@@ -397,7 +405,7 @@ body.glitch {
     }
 
     .popup-body {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
 
     .escape-box {
@@ -407,12 +415,12 @@ body.glitch {
 
     .exit-message {
         bottom: 60px;
-        font-size: 0.75rem;
+        font-size: 0.8rem;
     }
 
     .real-exit-btn {
         top: 12px;
         right: 12px;
-        font-size: 0.75rem;
+        font-size: 0.8rem;
     }
 }
