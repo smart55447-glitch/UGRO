@@ -23,6 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
         leftVw: 12
     };
 
+    // ✅ 보상 힌트 문구 좀 더 강조
+    if (hintEl) {
+        hintEl.style.fontSize = "1.3rem";
+        hintEl.style.fontWeight = "700";
+    }
+
     function triggerShake() {
         app.classList.add("shake");
         setTimeout(() => {
@@ -42,10 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!hintEl) return;
         if (clickCount < 20) {
             hintEl.textContent =
-                "100클릭 이상이면 토스 보상(추첨) 화면이 열립니다.";
+                "100클릭 이상이면 ㄱㅍㅌㅋ이  열립니다.";
         } else if (clickCount < 60) {
             hintEl.textContent =
-                `토스 보상까지 ${100 - clickCount}클릭 남았습니다.`;
+                `ㄱㅍㅌㅋ까지 ${100 - clickCount}클릭 남았습니다.`;
         } else if (clickCount < 100) {
             hintEl.textContent =
                 `거의 다 왔어요. 보상까지 ${100 - clickCount}클릭.`;
@@ -94,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return "닫지 말라고 했습니다.\n이미 기록되고 있습니다.";
         }
         if (clickCount < 100) {
-            return "탈출 시도가 감지되었습니다.\n토스 보상을 포기하시겠습니까?";
+            return "탈출 시도가 감지되었습니다.\nㄱㅍㅌㅋ을 포기하시겠습니까?";
         }
         return "이미 안쪽까지 들어왔습니다.\n오른쪽 위를 확인하세요.";
     }
@@ -116,6 +122,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const closeBtn = document.createElement("button");
         closeBtn.textContent = "닫기";
+
+        // ✅ 닫기 버튼 더 크게
+        closeBtn.style.padding = "10px 20px";
+        closeBtn.style.fontSize = "1rem";
+        closeBtn.style.minWidth = "100px";
+        closeBtn.style.borderRadius = "6px";
 
         closeBtn.addEventListener("click", () => {
             registerClick();
@@ -299,7 +311,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ">
           마지막 화면입니다.<br/>
           여기까지 온 클릭 수: ${clickCount}회<br/><br/>
-          이제 정말 끝입니다.
+          보상은 곤프타콘입니다.
+          친구에게 공유해 놀려주세요!
         </div>
       `;
         });
@@ -341,6 +354,7 @@ document.addEventListener("DOMContentLoaded", () => {
         warningText.textContent =
             "닫을수록 깊어집니다. 토스 보상까지 버텨보세요.";
 
+        // ✅ 처음 들어오자마자 팝업 바로 켜지도록
         for (let i = 0; i < 4; i++) {
             createPopup(false, "random");
         }
@@ -353,8 +367,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 3500);
     }
 
-    startButton.addEventListener("click", startGame);
-    setTimeout(startGame, 800);
+    // 시작 버튼으로도 시작 가능
+    if (startButton) {
+        startButton.addEventListener("click", startGame);
+    }
+
+    // ✅ 페이지 실행하자마자 자동 시작
+    startGame();
 
     history.pushState({ inGame: true }, "", location.href);
 
